@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>{{doctitle}}</title>
+    <style>
+      /*Page Layout*/
+      @page {
+        size: A4;
+        margin: 10mm;
+        counter-increment: page;
+        counter-reset: pages 0;
+        @bottom-center {
+          content: counter(page) "/" counter(pages);
+          margin-bottom: 40mm;
+        }
+      }
+
+      /*Print Layout*/
+      @media print {
+        body {
+          margin: 0;
+          padding: 0;
+          font-family: Arial, sans-serif;
+          box-sizing: border-box;
+        }
+        .layout {
+          padding: 5mm;
+          width: 100%;
+          height: 100%;
+        }
+        .header {
+          position: fixed;
+          left: 0mm;
+          right: 0mm;
+          height: 25mm;
+          width: 100%;
+          top: 0;
+          border-bottom: 1.5px solid #000;
+        }
+        .footer {
+          position: fixed;
+          left: 0mm;
+          right: 0mm;
+          height: 20mm;
+          width: 100%;
+          bottom: 0;
+          border-top: 1.5px solid #000;
+        }
+        .header-space {
+          width: 100%;
+          height: 30mm;
+          margin: 0;
+        }
+        .footer-space {
+          width: 100%;
+          height: 25mm;
+          margin: 0;
+        }
+        .content {
+          top: 0;
+          margin-top: 25mm;
+          margin-bottom: 20mm;
+          height: calc(100% - 25mm - 20mm);
+          margin-left: 20mm;
+          margin-right: 20mm;
+          page-break-inside: auto;
+        }
+        hr {
+          border-color: #999 !important;
+        }
+        /*Page Breaks*/
+        .content > * {
+          page-break-inside: auto;
+        }
+        ul,
+        li {
+          page-break-inside: avoid;
+        }
+
+        /*Pagination*/
+        .pagination {
+          counter-increment: page;
+        }
+      }
+
+      /*Header*/
+      .header-container {
+        margin-left: 5mm;
+        margin-right: 5mm;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .header-text {
+        flex: 1;
+      }
+      .header-title {
+        vertical-align: middle;
+        font-size: 25px;
+      }
+      .header-subtitle {
+        vertical-align: middle;
+        margin-bottom: 5mm;
+      }
+      .header-image img {
+        max-width: 200px;
+        height: auto;
+      }
+
+      /*Footer*/
+      .footer-container {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        max-width: 100%;
+        margin-left: 5mm;
+        margin-right: 5mm;
+      }
+
+      .footer-item {
+        flex: 1;
+        text-align: center;
+      }
+
+      .footer-item p {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <table class="layout">
+      <thead>
+        <tr>
+          <td>
+            <div class="header-space">&nbsp;</div>
+          </td>
+        </tr>
+      </thead>
+      <tbody class="content">
+        <tr>
+          <td>{{content}}</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>
+            <div class="footer-space">&nbsp;</div>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+    <div class="header">
+      <div class="header-container">
+        <div class="header-text">
+          <h1 class="header-title">{{title}}</h1>
+          <p class="header-subtitle">{{subtitle}}</p>
+        </div>
+        <div class="header-image">
+          <img src="{{logo}}" alt="IMAGE NOT FOUND" />
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="footer-container">
+        <div class="footer-row">
+          <p><i class="fa-solid fa-code-merge"></i> {{version}} / {{build}}</p>
+        </div>
+        <div class="footer-row">
+          <p><i class="fa-solid fa-calendar-days"></i> {{date}}</p>
+        </div>
+        <div class="footer-row">
+          <p>
+            <i class="fa-brands fa-github"></i>
+            <a href="{{github-url}}">{{github-alias}}</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="pagination"></div>
+  </body>
+</html>

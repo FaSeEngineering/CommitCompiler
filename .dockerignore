@@ -1,0 +1,16 @@
+# Application
+app
+venv
+
+# Git
+.gitignore
+.git 
+
+# Docker
+docker-compose.yml
+Dockerfile
+.dockerignore
+.env
+
+# Development
+Test.ps1
